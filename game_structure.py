@@ -46,3 +46,23 @@ def the_player_guess(player_try, right_combination):
 
     return right_place, wrong_place
 
+
+def play_the_game():
+    possible_values = the_possible_values()
+    right_combination = generate_new_combination(possible_values)
+    attempts_left = max_tries
+
+    display_message(f"Possible values: {', '.join(possible_values)}")
+    display_message(f"Try to guess the {length_combination}-digit combination in {max_tries} attempts!")
+
+    for attempt in range(max_tries):
+        player_try = validated_guess(input("Enter your guess: "), possible_values)
+        well_placed, misplaced = the_player_guess(player_try, right_combination)
+
+        display_message(f"Well-placed: {well_placed}, Misplaced: {misplaced}")
+
+        if well_placed == length_combination:
+            display_message("🎉 Congratulations! You guessed the right combination!")
+            break
+    else:
+        display_message(f"😭 Failed! The right combination was: {''.join(right_combination)}")
