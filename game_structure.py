@@ -15,6 +15,7 @@ def the_possible_values():
 def generate_new_combination(possible_values):
     return [ random.choice(possible_values) for possibilities in range(length_combination)]
 
+    # return random.sample(possible_values, length_combination) si je veux pas des doublons
 
 if __name__ == "__main__":
     possible_values = the_possible_values()
@@ -56,7 +57,7 @@ def play_the_game():
     display_message(f"Try to guess the {length_combination}-digit combination in {max_tries} attempts!")
 
     for attempt in range(max_tries):
-        attempts_left = max_tries - attempt - 1  
+        attempts_left = max_tries - attempt 
         display_message(f"Attempts left: {attempts_left}")
 
         player_try = validated_guess(input("Enter your guess: "), possible_values)
