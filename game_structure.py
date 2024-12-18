@@ -40,22 +40,25 @@ def the_player_guess(player_try, right_combination):
             guess[number] = None
 
     for value in guess:
-        if value is not None and value in right_combination:
+        if value is not None and value in answer:
             wrong_place += 1
-            right_combination[right_combination.index(value)] = None
+            answer[answer.index(value)] = None
 
     return right_place, wrong_place
+
 
 
 def play_the_game():
     possible_values = the_possible_values()
     right_combination = generate_new_combination(possible_values)
-    attempts_left = max_tries
 
     display_message(f"Possible values: {', '.join(possible_values)}")
     display_message(f"Try to guess the {length_combination}-digit combination in {max_tries} attempts!")
 
     for attempt in range(max_tries):
+        attempts_left = max_tries - attempt - 1  
+        display_message(f"Attempts left: {attempts_left}")
+
         player_try = validated_guess(input("Enter your guess: "), possible_values)
         well_placed, misplaced = the_player_guess(player_try, right_combination)
 
@@ -66,3 +69,4 @@ def play_the_game():
             break
     else:
         display_message(f"😭 Failed! The right combination was: {''.join(right_combination)}")
+
