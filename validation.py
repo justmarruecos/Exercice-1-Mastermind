@@ -8,6 +8,7 @@ def validated_guess(player_try, possible_values):
 
 #pour accepter les autres formes sans espace et avec virgule 
 """ 
+
     guess = guess.replace(",", " ")
     if len(guess.strip()) == length_combination and guess.isdigit():
         guess_list = list(guess)

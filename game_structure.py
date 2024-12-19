@@ -53,6 +53,7 @@ def play_the_game():
     possible_values = the_possible_values()
     right_combination = generate_new_combination(possible_values)
 
+    display_message("Welcome to MasterMind!")
     display_message(f"Possible values: {', '.join(possible_values)}")
     display_message(f"Try to guess the {length_combination}-digit combination in {max_tries} attempts!")
 
@@ -60,14 +61,18 @@ def play_the_game():
         attempts_left = max_tries - attempt 
         display_message(f"Attempts left: {attempts_left}")
 
-        player_try = validated_guess(input("Enter your guess: "), possible_values)
-        well_placed, misplaced = the_player_guess(player_try, right_combination)
+        try:
+            player_try = validated_guess(input("Enter your guess: "), possible_values)
+        except ValueError as e:
+            print(f"Error: {e}")
+            continue
 
-        display_message(f"Well-placed: {well_placed}, Misplaced: {misplaced}")
+        right_place, wrong_place = the_player_guess(player_try, right_combination)
+        display_message(f"In the right place: {right_place}, In the wrong place: {wrong_place}")
 
-        if well_placed == length_combination:
-            display_message("🎉 Congratulations! You guessed the right combination!")
+        if right_place == length_combination:
+            display_message("Congratulations! You won!")
             break
     else:
-        display_message(f"😭 Failed! The right combination was: {''.join(right_combination)}")
+        display_message(f"Failed! The right combination was: {''.join(right_combination)}")
 
